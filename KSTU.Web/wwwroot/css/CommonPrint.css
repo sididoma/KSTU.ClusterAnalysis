@@ -1,0 +1,24 @@
+﻿td {
+    font-size: 11px;
+}
+
+table {
+    width: 100%;
+    border-spacing: 1px 1px;
+}
+
+@media print {
+    #DivIdToPrint, #Block, #step {
+        margin-right: 20px;
+        min-width: 90px;
+        padding-top: -30px;
+    }
+}
+#Block2 {
+    height: 40px;
+}
+@page {
+    size: auto;
+    margin: 5px;
+    padding: -10px;
+}
