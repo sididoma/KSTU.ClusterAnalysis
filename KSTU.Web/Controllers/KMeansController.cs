@@ -33,7 +33,7 @@ namespace KSTU.Web.Controllers
         [HttpPost]
         public IActionResult ShowResult(KMeansCreateVM model)
         {
-            var data = _fileService.GetDataFromTxt(model.UploadFile);
+            var data = _fileService.GetData(model.UploadFile, model.DataType);
             IDistance distance = DistanceFactory.GetDistance(model.DistanceType);
             var result = _kMeans.Clustering(data, distance, model.ClustersCount);
             return View(result);

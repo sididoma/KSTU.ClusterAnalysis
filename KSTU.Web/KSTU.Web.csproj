@@ -14,6 +14,7 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\DataGenerator\DataGenerator.csproj" />
     <ProjectReference Include="..\KSTU.App.Data\KSTU.App.Data.csproj" />
     <ProjectReference Include="..\KSTU.ClusterAnalysis.BLL\KSTU.ClusterAnalysis.BLL.csproj" />
   </ItemGroup>

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KSTU.App.BLL\KSTU.App.BLL.csproj" />
+    <ProjectReference Include="..\KSTU.App.Data\KSTU.App.Data.csproj" />
+    <ProjectReference Include="..\KSTU.Common\KSTU.Common.csproj" />
+  </ItemGroup>
+
+</Project>

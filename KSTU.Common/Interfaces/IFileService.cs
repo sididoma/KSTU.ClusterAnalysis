@@ -8,7 +8,6 @@ namespace KSTU.Common.Interfaces
 {
     public interface IFileService
     {
-        List<ClusterEntityDTO> GetDataFromTxt(IFormFile file);
-        List<ClusterEntityDTO> GetDataFromExcel(IFormFile file);
+        List<ClusterEntityDTO> GetData(IFormFile file, byte dataType);
     }
 }

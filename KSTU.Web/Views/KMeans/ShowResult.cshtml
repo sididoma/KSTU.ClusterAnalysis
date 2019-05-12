@@ -40,6 +40,10 @@
 
 <script>
     $(document).ready(function () {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            "language": {
+                "url": '/lib/datatables/Russian.json'
+            }
+    });
     });
 </script>

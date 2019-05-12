@@ -11,4 +11,11 @@ namespace KSTU.Common.Helpers
         Manhattan = 3,
         Chebyshev = 4
     }
+
+    public enum DataType
+    {
+        Text = 1,
+        Excel = 2,
+        DataBase = 3
+    }
 }

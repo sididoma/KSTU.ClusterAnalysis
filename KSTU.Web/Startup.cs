@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KSTU.App.BLL.Interfaces;
 using KSTU.App.Data.Domain;
+using KSTU.App.Data.Repositories;
 using KSTU.ClusterAnalysis.BLL.Interfaces;
 using KSTU.ClusterAnalysis.BLL.Services;
 using KSTU.Common.Interfaces;
@@ -51,6 +53,8 @@ namespace KSTU.Web
 
             services.AddScoped<IKMeans, KMeans>();
             services.AddScoped<IFileService, FileService>();
+
+            services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
 
             services.AddMvc(options =>
             {
