@@ -107,7 +107,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                 return false;
 
             if (centroids.Where(x => x.ClustersCount == 0).Count() > 0)
-                return false;
+                return true;
 
             return changes;
         }
@@ -115,7 +115,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
         private bool UpdateCentroids(ref List<ClusterEntityDTO> clusters, ref List<ClusterEntityDTO> centroids)
         {
             if (centroids.Where(x => x.ClustersCount == 0).Count() > 0)
-                return false;
+                return true;
 
             for (int k = 0; k < centroids.Count; k++)
                 for (int j = 0; j < centroids[k].Interests.Count; j++)
