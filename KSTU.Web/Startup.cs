@@ -54,6 +54,8 @@ namespace KSTU.Web
             services.AddScoped<IKMeans, KMeans>();
             services.AddScoped<IFileService, FileService>();
 
+            services.AddScoped<IHierarchical, Hierarchical>();
+
             services.AddScoped(typeof(IRepo<>), typeof(Repo<>));
 
             services.AddMvc(options =>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace KSTU.Common.Helpers
 {
-    public enum DistanceTypes
+    public enum EnumDistanceTypes
     {
         Euclidean = 1,
         EuclideanSquare = 2,
@@ -12,10 +12,18 @@ namespace KSTU.Common.Helpers
         Chebyshev = 4
     }
 
-    public enum DataType
+    public enum EnumDataType
     {
         Text = 1,
         Excel = 2,
         DataBase = 3
+    }
+
+    public enum EnumClusterDistanceTypes
+    {
+        SingleConnection = 1,
+        FullConnection = 2,
+        PairWiseMean = 3,
+        Centroid = 4
     }
 }

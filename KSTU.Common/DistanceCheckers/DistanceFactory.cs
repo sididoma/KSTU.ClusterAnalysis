@@ -12,11 +12,11 @@ namespace KSTU.Common.DistanceCheckers
         {
             switch (type)
             {
-                case (byte)DistanceTypes.Chebyshev:
+                case (byte)EnumDistanceTypes.Chebyshev:
                     return new ChebyshevDistance();
-                case (byte)DistanceTypes.EuclideanSquare:
+                case (byte)EnumDistanceTypes.EuclideanSquare:
                     return new EuclideanDistance();
-                case (byte)DistanceTypes.Manhattan:
+                case (byte)EnumDistanceTypes.Manhattan:
                     return new ManhattanDistance();
                 default:
                     return new EuclideanDistance();

@@ -17,11 +17,11 @@ namespace KSTU.Common.Services
         {
             switch (dataType)
             {
-                case (byte)DataType.Text:
+                case (byte)EnumDataType.Text:
                     return GetDataFromTxt(file);
-                case (byte)DataType.Excel:
+                case (byte)EnumDataType.Excel:
                     return GetDataFromExcel(file);
-                case (byte)DataType.DataBase:
+                case (byte)EnumDataType.DataBase:
                     return GetDataFromDB();
             }
             return new List<ClusterEntityDTO>();
