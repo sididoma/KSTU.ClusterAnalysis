@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Telegram.Bot" Version="14.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\KSTU.App.BLL\KSTU.App.BLL.csproj" />
     <ProjectReference Include="..\KSTU.App.Data\KSTU.App.Data.csproj" />
     <ProjectReference Include="..\KSTU.Common\KSTU.Common.csproj" />

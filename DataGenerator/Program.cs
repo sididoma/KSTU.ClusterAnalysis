@@ -6,28 +6,33 @@ using KSTU.Common.DTOs;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Telegram.Bot;
 
 namespace DataGenerator
 {
     public class Program
     {
-        private readonly IRepo<User> _userRepo;
         private static readonly int _countUsers = 1000;
         private static readonly int _countInterests = 1000;
         private static readonly int _countInterestsPerUser = 5;
-        public Program(IRepo<User> userRepo)
+        private readonly IRepo<User> _userRepo;
+        private readonly IRepo<Hobbies> _hobbiesRepo;
+        private readonly IRepo<TestNames> _testNamesRepo;
+        private readonly IRepo<TestSurNames> _testSurNamesRepo;
+        private readonly IRepo<UserInterests> _userInterestsRepo;
+
+        public Program(IRepo<User> userRepo, IRepo<Hobbies> hobbiesRepo, IRepo<TestNames> testNamesRepo, IRepo<TestSurNames> testSurNamesRepo, IRepo<UserInterests> userInterestsRepo)
         {
             _userRepo = userRepo;
+            _hobbiesRepo = hobbiesRepo;
+            _testNamesRepo = testNamesRepo;
+            _testSurNamesRepo = testSurNamesRepo;
+            _userInterestsRepo = userInterestsRepo;
         }
+
         static void Main(string[] args)
         {
-            List<string> musicTypes = GetMusicTypes();
-            List<User> users = new List<User>();
-
-            for(int i = 0; i < _countUsers; i++)
-            {
-
-            }
+            
         }
 
         public static List<string> GetMusicTypes()
@@ -37,7 +42,7 @@ namespace DataGenerator
             using (StreamReader reader = new StreamReader("D:\\musics.txt"))
             {
                 string line;
-                while((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null)
                 {
                     result.Add(line.Trim());
                 }

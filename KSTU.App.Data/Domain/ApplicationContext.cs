@@ -16,5 +16,8 @@ namespace KSTU.App.Data.Domain
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserInterests> UserInterests { get; set; }
+        public DbSet<TestSurNames> TestSurNames { get; set; }
+        public DbSet<TestNames> TestNames { get; set; }
+        public DbSet<Hobbies> Hobbies { get; set; }
     }
 }
