@@ -11,10 +11,11 @@ namespace KSTU.ClusterAnalysis.BLL.Services
     {
         private IDistance _distance;
         private IClusterDistance _clusterDistance;
-        public ClusterEntityDTO Clustering(List<ClusterEntityDTO> data, IDistance distance, IClusterDistance clusterDistance, int maxUnionInStep)
+        public ClusterEntityDTO Clustering(List<ClusterEntityDTO> clusteringData, IDistance distance, IClusterDistance clusterDistance, int maxUnionInStep)
         {
             _distance = distance;
             _clusterDistance = clusterDistance;
+            var data = Normlize(clusteringData);
             int step = 0;
             while (true)
             {
@@ -24,6 +25,31 @@ namespace KSTU.ClusterAnalysis.BLL.Services
             }
             data[0].Name = "Root";
             return data[0];
+        }
+
+        private List<ClusterEntityDTO> Normlize(List<ClusterEntityDTO> clusters)
+        {
+            List<ClusterEntityDTO> result = new List<ClusterEntityDTO>(clusters);
+
+            for (int j = 0; j < result[0].Interests.Count; j++)
+            {
+                double columnSum = 0.0;
+                for (int i = 0; i < result.Count; i++)
+                    columnSum += result[i].Interests[j].Weight;
+
+                double mean = columnSum / result.Count;
+                double sum = 0.0;
+
+                for (int i = 0; i < result.Count; i++)
+                    sum += (result[i].Interests[j].Weight - mean) * (result[i].Interests[j].Weight - mean);
+
+                double sd = sum / result.Count;
+
+                for (int i = 0; i < result.Count; i++)
+                    result[i].Interests[j].Weight = (result[i].Interests[j].Weight - mean) / sd;
+            }
+
+            return result;
         }
 
         private List<ClusterEntityDTO> Union(List<ClusterEntityDTO> data, int maxUnion, int step)
@@ -96,25 +122,6 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                         }
                         result[k].Interests[j].Weight = weight / result[k].Children.Count;
                     }
-                }
-            }
-
-            return result;
-        }
-
-        private double[][] GetDistanceMatrix(List<ClusterEntityDTO> data)
-        {
-            double[][] result = new double[data.Count][];
-            for (int i = 0; i < data.Count; i++)
-                result[i] = new double[data[i].Interests.Count];
-
-            for (int i = 0; i < data.Count; i++)
-            {
-                for (int j = i + 1; j < data.Count; j++)
-                {
-                    double dist = _clusterDistance.GetDistance(data[i].Children ?? new List<ClusterEntityDTO> { data[i] }, data[j].Children ?? new List<ClusterEntityDTO> { data[j] }, _distance);
-                    result[i][j] = dist;
-                    result[j][i] = dist;
                 }
             }
 

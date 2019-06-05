@@ -21,7 +21,6 @@ namespace KSTU.Web.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.DistanceTypes = "";
             return View();
         }
 

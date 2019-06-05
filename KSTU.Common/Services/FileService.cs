@@ -21,8 +21,6 @@ namespace KSTU.Common.Services
                     return GetDataFromTxt(file);
                 case (byte)EnumDataType.Excel:
                     return GetDataFromExcel(file);
-                case (byte)EnumDataType.DataBase:
-                    return GetDataFromDB();
             }
             return new List<ClusterEntityDTO>();
         }

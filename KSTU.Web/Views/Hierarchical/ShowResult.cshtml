@@ -6,14 +6,10 @@
 }
 <h1>@ViewData["Title"]</h1>
 <section>
-    <div id="MyDiv" class="container">
-
-    </div>
+    <div id="MyDiv" class="container"></div>
 </section>
 <script src="~/lib/NewFolder/D3.js"></script>
 <script>
-
-
     var root =@Html.Raw(Json.Serialize(Model));
     var width = 1000,
         height = 700;

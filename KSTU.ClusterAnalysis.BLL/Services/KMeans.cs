@@ -14,7 +14,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
         public List<ClusterEntityDTO> Clustering(List<ClusterEntityDTO> data, IDistance distance, int clustersCount)
         {
             _distance = distance;
-            List<ClusterEntityDTO> clusters = data;//Normlize(data);
+            List<ClusterEntityDTO> clusters = Normlize(data);
 
             bool changed = true;
             bool success = true;
@@ -22,9 +22,9 @@ namespace KSTU.ClusterAnalysis.BLL.Services
             List<ClusterEntityDTO> centroids = SetCentroids(ref data, clustersCount);
             int maxIter = clusters.Count * 10;
             int iterCount = 0;
-            while(changed && iterCount < maxIter)
+            while (changed && iterCount < maxIter)
             {
-                changed = UpdateClusters(ref clusters,ref centroids);
+                changed = UpdateClusters(ref clusters, ref centroids);
                 success = UpdateCentroids(ref clusters, ref centroids);
                 iterCount++;
             }
@@ -36,7 +36,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
         {
             List<ClusterEntityDTO> result = new List<ClusterEntityDTO>(clusters);
 
-            for(int j = 0;j< result[0].Interests.Count; j++)
+            for (int j = 0; j < result[0].Interests.Count; j++)
             {
                 double columnSum = 0.0;
                 for (int i = 0; i < result.Count; i++)
@@ -61,7 +61,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
         {
             Random rnd = new Random(0);
             List<ClusterEntityDTO> centroids = new List<ClusterEntityDTO>();
-            for(int i = 0; i < clustersCount; i++)
+            for (int i = 0; i < clustersCount; i++)
             {
                 ClusterEntityDTO dTO = clusters[rnd.Next(0, clusters.Count - 1)];
                 if (centroids.Contains(dTO))
@@ -76,7 +76,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
             return centroids;
         }
 
-        private bool UpdateClusters(ref List<ClusterEntityDTO> clusters,ref List<ClusterEntityDTO> centroids)
+        private bool UpdateClusters(ref List<ClusterEntityDTO> clusters, ref List<ClusterEntityDTO> centroids)
         {
             double[] distance = new double[centroids.Count];
             bool changes = false;
@@ -87,15 +87,15 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                 centroids[i].ClustersCount = 0;
             }
 
-            for(int i = 0; i < clusters.Count; i++)
+            for (int i = 0; i < clusters.Count; i++)
             {
-                for(int j = 0; j < centroids.Count; j++)
+                for (int j = 0; j < centroids.Count; j++)
                 {
                     distance[j] = _distance.GetDinstance(clusters[i], centroids[j]);
                 }
                 int clId = GetIndexOfMin(distance);
 
-                if(clId != clusters[i].CentroidId)
+                if (clId != clusters[i].CentroidId)
                 {
                     changes = true;
                     clusters[i].CentroidId = clId;
@@ -123,10 +123,10 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                     centroids[k].Interests[j].Weight = 0.0;
                 }
 
-            for(int i = 0; i < clusters.Count; i++)
+            for (int i = 0; i < clusters.Count; i++)
             {
                 int clusterId = clusters[i].CentroidId;
-                for(int j = 0; j < clusters[i].Interests.Count; j++)
+                for (int j = 0; j < clusters[i].Interests.Count; j++)
                 {
                     centroids[clusterId].Interests[j].Weight += clusters[i].Interests[j].Weight;
                 }
@@ -142,7 +142,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
         {
             double min = double.MaxValue;
             int minId = -1;
-            for(int i = 0; i < data.Length; i++)
+            for (int i = 0; i < data.Length; i++)
             {
                 if (min > data[i])
                 {
