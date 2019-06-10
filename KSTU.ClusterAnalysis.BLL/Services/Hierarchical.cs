@@ -105,6 +105,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                     temp.Children = new List<ClusterEntityDTO>(new List<ClusterEntityDTO> { data[i] });
                     temp.Name = data[i].Children == null ? GetName(counter++) : data[i].Name;
                     result.Add(temp);
+                    //result.Add(data[i]);
                 }
             }
 

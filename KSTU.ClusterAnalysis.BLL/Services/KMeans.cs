@@ -48,7 +48,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                 for (int i = 0; i < result.Count; i++)
                     sum += (result[i].Interests[j].Weight - mean) * (result[i].Interests[j].Weight - mean);
 
-                double sd = sum / result.Count;
+                double sd = Math.Sqrt(sum / result.Count);
 
                 for (int i = 0; i < result.Count; i++)
                     result[i].Interests[j].Weight = (result[i].Interests[j].Weight - mean) / sd;
