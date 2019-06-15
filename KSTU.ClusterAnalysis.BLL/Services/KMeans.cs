@@ -11,7 +11,7 @@ namespace KSTU.ClusterAnalysis.BLL.Services
     public class KMeans : IKMeans
     {
         private IDistance _distance;
-        public List<ClusterEntityDTO> Clustering(List<ClusterEntityDTO> data, IDistance distance, int clustersCount)
+        public ReturnEntityDTO Clustering(List<ClusterEntityDTO> data, IDistance distance, int clustersCount)
         {
             _distance = distance;
             List<ClusterEntityDTO> clusters = Normlize(data);
@@ -28,10 +28,40 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                 success = UpdateCentroids(ref clusters, ref centroids);
                 iterCount++;
             }
+            UpdateCentroidsForView(ref centroids, clusters);
+            var result = new ReturnEntityDTO
+            {
+                Result = clusters.AsEnumerable().OrderBy(g => g.CentroidId).ToList(),
+                Centroid = centroids
+            };
 
-            return clusters.AsEnumerable().OrderBy(g => g.CentroidId).ToList();
+            return result;
         }
+        private void UpdateCentroidsForView(ref List<ClusterEntityDTO> centroids, List<ClusterEntityDTO> clusters)
+        {
+            if (centroids.Where(x => x.ClustersCount == 0).Count() > 0)
+                return;
 
+            for (int k = 0; k < centroids.Count; k++)
+                for (int j = 0; j < centroids[k].Interests.Count; j++)
+                {
+                    centroids[k].Interests[j].Weight2 = 0.0;
+                }
+
+            for (int i = 0; i < clusters.Count; i++)
+            {
+                int clusterId = clusters[i].CentroidId;
+                for (int j = 0; j < clusters[i].Interests.Count; j++)
+                {
+                    centroids[clusterId].Interests[j].Weight2 += clusters[i].Interests[j].Weight2;
+                }
+            }
+
+            for (int k = 0; k < centroids.Count; k++)
+                for (int j = 0; j < centroids[k].Interests.Count; j++)
+                    centroids[k].Interests[j].Weight2 /= centroids[k].ClustersCount;
+            return;
+        }
         private List<ClusterEntityDTO> Normlize(List<ClusterEntityDTO> clusters)
         {
             List<ClusterEntityDTO> result = new List<ClusterEntityDTO>(clusters);
@@ -70,7 +100,8 @@ namespace KSTU.ClusterAnalysis.BLL.Services
                 }
                 else
                 {
-                    centroids.Add(dTO);
+                    dTO.Id = i;
+                    centroids.Add(dTO.CloneObjectSerializable());
                 }
             }
             return centroids;
@@ -152,5 +183,11 @@ namespace KSTU.ClusterAnalysis.BLL.Services
             }
             return minId;
         }
+    }
+
+    public class ReturnEntityDTO
+    {
+        public List<ClusterEntityDTO> Result { get; set; }
+        public List<ClusterEntityDTO> Centroid { get; set; }
     }
 }

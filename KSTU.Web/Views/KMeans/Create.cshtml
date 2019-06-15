@@ -11,38 +11,52 @@
         <form asp-action="ShowResult" asp-controller="KMeans" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label asp-for="ClustersCount" class="control-label"></label>
-                <input asp-for="ClustersCount" type="number" class="form-control" />
+                <input asp-for="ClustersCount" type="number" class="form-control" style="width:61%"/>
                 <span asp-validation-for="ClustersCount" class="text-danger"></span>
             </div>
-            <div class="form-group">
                 <label asp-for="DistanceType" class="control-label"></label>
+            <div class="form-inline">
                 <select asp-for="DistanceType" class="form-control">
                     <option value="1">Евклидово расстояние</option>
                     <option value="2">Квадрат Евклидова расстояния</option>
                     <option value="3">Расстояние городских кварталов(Манхэттенское растояние)</option>
                     <option value="4">Расстояние Чебышева</option>
                 </select>
+                &nbsp;&nbsp;&nbsp;
+                <img id="image" src="~/logo/1.png"/>
             </div>
             <div class="form-group">
                 <label asp-for="DataType" class="control-label"></label>
-                <select asp-for="DataType" class="select form-control">
-                    <option value="1">Текстовый файл(.txt)</option>
+                <select asp-for="DataType" class="select form-control" id="fileTypeSelect" style="width:61%">
                     <option value="2">Excel файл(.xlsx,.xls)</option>
+                    <option value="1">Текстовый файл(.txt)</option>
                 </select>
             </div>
-            <label asp-for="UploadFile" class="control-label"></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Загрузить</span>
-                </div>
-                <div class="custom-file">
-                    <input asp-for="UploadFile" class="custom-file-input" id="inputGroupFile01"
-                           aria-describedby="inputGroupFileAddon01">
-                    <label class="custom-file-label" for="inputGroupFile01">Выберите файл</label>
-                </div>
-                <span asp-validation-for="UploadFile" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="UploadFile" class="control-label"></label>
+                <input asp-for="UploadFile" class="form-control-file" accept=".xlsx, .xls" />
             </div>
-            <input type="submit" value="Clutering" class="btn btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Clutering" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </section>
+<script>
+    $(document).ready(function () {
+        $('#fileTypeSelect').change(function () {
+            var type = $(this).val();
+
+            if (type == 1)
+                $('#UploadFile').attr('accept', '.txt');
+            else
+                $('#UploadFile').attr('accept', '.xlsx, .xls');
+        })
+
+        $('#DistanceType').change(function () {
+            var type = $(this).val();
+            $('#image').attr('src', '/logo/' + type + '.png');
+        })
+    });
+
+</script>

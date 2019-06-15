@@ -8,7 +8,41 @@
 <h1>@ViewData["Title"]</h1>
 
 <div id="chart_div"></div>
-
+<hr />
+<h4>Центры кластеров</h4>
+<hr />
+<table class="table table-striped table-bordered" style="width:100%" id="tbl">
+    @{
+        <thead>
+            <tr>
+                <th>Название</th>
+                @foreach (var item in Model[0].Interests)
+                {
+                    <th>@item.Name</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Centroids)
+            {
+                <tr>
+                    <td>@("Кластер №" + (item.Id + 1))</td>
+                    @{
+                        foreach (var inter in item.Interests)
+                        {
+                            <td>
+                                @inter.Weight2
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    }
+</table>
+<hr />
+<h4>Профили пользователей</h4>
+<hr />
 <table class="table table-striped table-bordered" id="myTable" style="width:100%">
     @{
         <thead>
@@ -44,6 +78,11 @@
 <script>
     $(document).ready(function () {
         $('#myTable').DataTable({
+            "language": {
+                "url": '/lib/datatables/Russian.json'
+            }
+        });
+        $('#tbl').DataTable({
             "language": {
                 "url": '/lib/datatables/Russian.json'
             }

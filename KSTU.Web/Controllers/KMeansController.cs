@@ -35,7 +35,8 @@ namespace KSTU.Web.Controllers
             var data = _fileService.GetData(model.UploadFile, model.DataType);
             IDistance distance = DistanceFactory.GetDistance(model.DistanceType);
             var result = _kMeans.Clustering(data, distance, model.ClustersCount);
-            return View(result);
+            ViewBag.Centroids = result.Centroid;
+            return View(result.Result);
         }
     }
 }

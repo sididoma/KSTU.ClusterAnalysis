@@ -1,9 +1,20 @@
 ﻿
 
 <section class="content-header">
-
+    <link href="~/css/modules.css" rel="stylesheet" />
 </section>
-
-<section class="content container-fluid">
-    <a class="nav-link text-dark" asp-controller="KMeans" asp-action="Create">Произвести кластеризацию</a>
+<section id="what-we-do">
+    <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                <div class="card">
+                    <a asp-controller="KMeans" asp-action="Create" title="Перейти" class="read-more">
+                        <i class="fa-book-open fa-4x fa-fw card-block fnt-style padding-icon">Кластеризовать</i>
+                        <hr />
+                        Далее<i class="fa fa-angle-double-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
