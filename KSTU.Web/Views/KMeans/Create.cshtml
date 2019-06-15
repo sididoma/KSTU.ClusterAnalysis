@@ -9,12 +9,12 @@
 <section class="content container-fluid">
     <div class="row">
         <form asp-action="ShowResult" asp-controller="KMeans" method="post" enctype="multipart/form-data">
-            <div class="form-group">
+            <div class="form-group" style="width:61%">
                 <label asp-for="ClustersCount" class="control-label"></label>
-                <input asp-for="ClustersCount" type="number" class="form-control" style="width:61%"/>
+                <input asp-for="ClustersCount" type="number" class="form-control" />
                 <span asp-validation-for="ClustersCount" class="text-danger"></span>
             </div>
-                <label asp-for="DistanceType" class="control-label"></label>
+            <label asp-for="DistanceType" class="control-label"></label>
             <div class="form-inline">
                 <select asp-for="DistanceType" class="form-control">
                     <option value="1">Евклидово расстояние</option>
@@ -23,16 +23,16 @@
                     <option value="4">Расстояние Чебышева</option>
                 </select>
                 &nbsp;&nbsp;&nbsp;
-                <img id="image" src="~/logo/1.png"/>
+                <img id="image" src="~/logo/1.png" />
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width:61%">
                 <label asp-for="DataType" class="control-label"></label>
-                <select asp-for="DataType" class="select form-control" id="fileTypeSelect" style="width:61%">
+                <select asp-for="DataType" class="select form-control" id="fileTypeSelect">
                     <option value="2">Excel файл(.xlsx,.xls)</option>
                     <option value="1">Текстовый файл(.txt)</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="width:61%">
                 <label asp-for="UploadFile" class="control-label"></label>
                 <input asp-for="UploadFile" class="form-control-file" accept=".xlsx, .xls" />
             </div>
