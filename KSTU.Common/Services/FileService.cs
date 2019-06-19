@@ -78,14 +78,14 @@ namespace KSTU.Common.Services
                     lines.Add(line);
                 }
             }
-            string[] names = lines[0].Split(" ");
+            string[] names = lines[0].Split("\t");
 
             List<ClusterEntityDTO> result = new List<ClusterEntityDTO>();
 
             for (int i = 1; i < lines.Count; i++)
             {
                 ClusterEntityDTO dTO = new ClusterEntityDTO();
-                string[] parametrs = lines[i].Split(" ");
+                string[] parametrs = lines[i].Split("\t");
                 dTO.Interests = new List<Interest>();
                 dTO.Name = parametrs[0];
 
